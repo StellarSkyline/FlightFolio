@@ -6,19 +6,20 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
+import com.example.flightfolio.ui.screen.LoginScreen
 
 @Composable
 fun AppNavigation(paddingValues: PaddingValues) {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = Screen.LoginScreen.route) {
+    NavHost(navController = navController, startDestination = Screen.LoginGraph.route) {
 
         //Login Graph
         navigation(
             startDestination = Screen.LoginScreen.route,
-            route = Screen.LoginScreen.route
+            route = Screen.LoginGraph.route
         ) {
             composable(route = Screen.LoginScreen.route) {
-                //TODO: Add Login Composable here
+                LoginScreen{}
                 //TODO: Add Shared ViewModel here
             }
         }
