@@ -1,4 +1,4 @@
-package com.example.flightfolio
+package com.example.flightfolio.ui.activity
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
