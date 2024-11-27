@@ -1,6 +1,5 @@
 package com.example.flightfolio.ui.screen
 
-import android.icu.number.Scale
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -12,22 +11,17 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -64,7 +58,8 @@ fun LoginScreen(onClick: (String) -> Any) {
                     .fillMaxWidth(),
                 painter = painterResource(id = R.drawable.icn_ff_logo),
                 contentDescription = "FlightFolio logo",
-                contentScale = ContentScale.Fit,)
+                contentScale = ContentScale.Fit,
+            )
         }
 
         Spacer(modifier = Modifier.height(70.dp))
@@ -73,31 +68,41 @@ fun LoginScreen(onClick: (String) -> Any) {
             modifier = Modifier.width(300.dp),
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.Start
-        ){
-            Text(text = "User Name:",
+        ) {
+            Text(
+                text = "User Name:",
                 color = FFColorList.txt_primary,
-                fontSize = 16.sp)
+                fontSize = 16.sp
+            )
 
             TextField(
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
                     .height(40.dp),
                 value = "",
-                colors = OutlinedTextFieldDefaults.colors( unfocusedContainerColor = Color.White ),
-                onValueChange = {}
+                colors = OutlinedTextFieldDefaults.colors(unfocusedContainerColor = Color.White),
+                onValueChange = {
+                    //TODO: Handle Text Input Logic
+                }
             )
 
             Spacer(modifier = Modifier.height(15.dp))
 
-            Text(text = "Password:",
+            Text(
+                text = "Password:",
                 color = FFColorList.txt_primary,
-                fontSize = 16.sp)
+                fontSize = 16.sp
+            )
 
             TextField(
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
                     .height(40.dp),
                 value = "",
-                colors = OutlinedTextFieldDefaults.colors( unfocusedContainerColor = Color.White ),
-                onValueChange = {}
+                colors = OutlinedTextFieldDefaults.colors(unfocusedContainerColor = Color.White),
+                onValueChange = {
+                    //TODO: Handle Text Input Logic
+                }
             )
 
             Spacer(modifier = Modifier.height(15.dp))
@@ -109,7 +114,7 @@ fun LoginScreen(onClick: (String) -> Any) {
                 colors = ButtonDefaults.buttonColors(containerColor = FFColorList.btn_secondary),
                 onClick = {
                     //TODO: Implement Login Logic
-            }) {
+                }) {
                 Text(text = "Login", fontSize = 16.sp)
             }
 
