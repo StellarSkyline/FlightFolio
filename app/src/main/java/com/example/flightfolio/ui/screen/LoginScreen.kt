@@ -11,26 +11,31 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.flightfolio.R
+import com.example.flightfolio.ui.components.InputText
+import com.example.flightfolio.ui.components.PrimaryButton
 import com.example.flightfolio.ui.theme.FFColorList
+import com.example.flightfolio.viewmodel.LoginViewModel
 
 
 @Composable
 fun LoginScreen(onClick: (String) -> Any) {
+
+    val vm:LoginViewModel = viewModel()
+    val userNameState by vm.userName.collectAsStateWithLifecycle()
+    val passwordState by vm.password.collectAsStateWithLifecycle()
 
     Column(
         modifier = Modifier
@@ -75,16 +80,12 @@ fun LoginScreen(onClick: (String) -> Any) {
                 fontSize = 16.sp
             )
 
-            TextField(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(40.dp),
-                value = "",
-                colors = OutlinedTextFieldDefaults.colors(unfocusedContainerColor = Color.White),
-                onValueChange = {
-                    //TODO: Handle Text Input Logic
-                }
-            )
+            InputText(
+                modifier = Modifier,
+                text = userNameState
+            ) {
+                vm.changeState(userName = it)
+            }
 
             Spacer(modifier = Modifier.height(15.dp))
 
@@ -94,46 +95,30 @@ fun LoginScreen(onClick: (String) -> Any) {
                 fontSize = 16.sp
             )
 
-            TextField(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(40.dp),
-                value = "",
-                colors = OutlinedTextFieldDefaults.colors(unfocusedContainerColor = Color.White),
-                onValueChange = {
-                    //TODO: Handle Text Input Logic
-                }
-            )
-
-            Spacer(modifier = Modifier.height(15.dp))
-
-            Button(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(40.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = FFColorList.btn_secondary),
-                onClick = {
-                    //TODO: Implement Login Logic
-                }) {
-                Text(text = "Login", fontSize = 16.sp)
+            InputText(
+                modifier = Modifier,
+                text = passwordState
+            ) {
+                vm.changeState(password = it)
             }
 
             Spacer(modifier = Modifier.height(15.dp))
 
-            Button(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(40.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = FFColorList.btn_secondary),
-                onClick = {
-                    //TODO: Implement Login Logic
-                }) {
-                Text(text = "Register", fontSize = 16.sp)
+            PrimaryButton(
+                title = "Login"
+            ) {
+                //TODO: Handle Logic
+            }
+
+            Spacer(modifier = Modifier.height(15.dp))
+
+            PrimaryButton(
+                title = "Register"
+            ) {
+                //TODO: Handle Logic
             }
         }
-
     }
-
 }
 
 @Preview

@@ -2,12 +2,18 @@ package com.example.flightfolio.viewmodel
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import dagger.hilt.android.lifecycle.HiltViewModel
 
-@HiltViewModel
 class LoginViewModel(
     val savedStateHandle: SavedStateHandle,
-): ViewModel() {
+) : ViewModel() {
+    val userName = savedStateHandle.getStateFlow(key = "userName", initialValue = "")
+    val password = savedStateHandle.getStateFlow(key = "password", initialValue = "")
 
-
+    fun changeState(
+        userName: String = savedStateHandle["userName"] ?: "",
+        password: String = savedStateHandle["password"] ?: ""
+    ) {
+        savedStateHandle["userName"] = userName
+        savedStateHandle["password"] = password
+    }
 }

@@ -49,9 +49,6 @@ dependencies {
     implementation(libs.androidx.navigation.runtime.ktx)
     kapt("com.google.dagger:hilt-android-compiler:2.48")
 
-    //HiltVM
-    implementation("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0")
-    kapt("androidx.hilt:hilt-compiler:1.0.0")
 
     //Navigation Compose
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
