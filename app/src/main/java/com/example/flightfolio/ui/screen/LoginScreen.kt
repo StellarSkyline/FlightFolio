@@ -21,6 +21,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.flightfolio.R
@@ -31,11 +32,11 @@ import com.example.flightfolio.viewmodel.LoginViewModel
 
 
 @Composable
-fun LoginScreen(onClick: (String) -> Any) {
+fun LoginScreen(onNavigate: (String) -> Any) {
 
-    val vm:LoginViewModel = viewModel()
-    val userNameState by vm.userName.collectAsStateWithLifecycle()
-    val passwordState by vm.password.collectAsStateWithLifecycle()
+    val vm:LoginViewModel = hiltViewModel()
+    val userName by vm.userName.collectAsStateWithLifecycle()
+    val password by vm.password.collectAsStateWithLifecycle()
 
     Column(
         modifier = Modifier
@@ -82,7 +83,7 @@ fun LoginScreen(onClick: (String) -> Any) {
 
             InputText(
                 modifier = Modifier,
-                text = userNameState
+                text = userName
             ) {
                 vm.changeState(userName = it)
             }
@@ -97,7 +98,7 @@ fun LoginScreen(onClick: (String) -> Any) {
 
             InputText(
                 modifier = Modifier,
-                text = passwordState
+                text = password
             ) {
                 vm.changeState(password = it)
             }
