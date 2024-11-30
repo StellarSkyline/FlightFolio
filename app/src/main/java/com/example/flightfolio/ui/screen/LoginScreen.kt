@@ -18,12 +18,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.flightfolio.R
 import com.example.flightfolio.ui.components.InputText
 import com.example.flightfolio.ui.components.PrimaryButton
@@ -32,9 +29,8 @@ import com.example.flightfolio.viewmodel.LoginViewModel
 
 
 @Composable
-fun LoginScreen(onNavigate: (String) -> Any) {
+fun LoginScreen(vm: LoginViewModel,onNavigate: (String) -> Any) {
 
-    val vm:LoginViewModel = hiltViewModel()
     val userName by vm.userName.collectAsStateWithLifecycle()
     val password by vm.password.collectAsStateWithLifecycle()
 
@@ -120,10 +116,4 @@ fun LoginScreen(onNavigate: (String) -> Any) {
             }
         }
     }
-}
-
-@Preview
-@Composable
-fun LoginScreenPreview() {
-    LoginScreen { }
 }
