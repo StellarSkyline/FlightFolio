@@ -20,7 +20,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun providesDataStore(@ApplicationContext app: Context): File =  app.dataStoreFile("saved_user")
+    fun providesDataStore(@ApplicationContext app: Context): File =  app.preferencesDataStoreFile("saved_user")
 
     @Provides
     @Singleton

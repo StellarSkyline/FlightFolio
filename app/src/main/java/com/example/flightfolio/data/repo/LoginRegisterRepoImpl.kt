@@ -14,7 +14,6 @@ class LoginRegisterRepoImpl(
         fullName: String,
         quickLoginPin: String
     ) {
-        TODO("Not yet implemented")
     }
 
     init{
