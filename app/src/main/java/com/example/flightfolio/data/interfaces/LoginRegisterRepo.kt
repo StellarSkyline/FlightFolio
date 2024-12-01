@@ -1,4 +1,4 @@
-package com.example.flightfolio.di.interfaces
+package com.example.flightfolio.data.interfaces
 
 interface LoginRegisterRepo {
     suspend fun registerUser(

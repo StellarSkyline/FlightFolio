@@ -3,7 +3,7 @@ package com.example.flightfolio.viewmodel
 import android.app.Application
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import com.example.flightfolio.di.interfaces.LoginRegisterRepo
+import com.example.flightfolio.data.interfaces.LoginRegisterRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
