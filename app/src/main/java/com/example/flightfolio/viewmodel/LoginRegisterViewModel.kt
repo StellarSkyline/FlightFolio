@@ -3,12 +3,14 @@ package com.example.flightfolio.viewmodel
 import android.app.Application
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import com.example.flightfolio.di.interfaces.LoginRegisterRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class LoginRegisterViewModel @Inject constructor(
     val app: Application,
+    val repo: LoginRegisterRepo,
     private val savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
     val userName = savedStateHandle.getStateFlow(key = "userName", initialValue = "")
