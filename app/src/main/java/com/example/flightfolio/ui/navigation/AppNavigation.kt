@@ -8,7 +8,8 @@ import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import com.example.flightfolio.extension.sharedViewModel
 import com.example.flightfolio.ui.screen.LoginScreen
-import com.example.flightfolio.viewmodel.LoginViewModel
+import com.example.flightfolio.ui.screen.RegisterScreen
+import com.example.flightfolio.viewmodel.LoginRegisterViewModel
 
 @Composable
 fun AppNavigation(paddingValues: PaddingValues) {
@@ -21,12 +22,21 @@ fun AppNavigation(paddingValues: PaddingValues) {
             route = Screen.LoginGraph.route
         ) {
             composable(route = Screen.LoginScreen.route) { entry ->
-                val viewModel = entry.sharedViewModel<LoginViewModel>(navController)
+                val viewModel = entry.sharedViewModel<LoginRegisterViewModel>(navController)
                 LoginScreen(vm = viewModel){
-                    //TODO: Navigation handler
+                    navController.navigate(it)
+                }
+            }
+
+            composable(route = Screen.RegisterScreen.route) { entry ->
+                val viewModel = entry.sharedViewModel<LoginRegisterViewModel>(navController)
+                RegisterScreen(viewModel) {
+                    //TODO: Handle Navigation Logic
                 }
             }
         }
+
+        //Other Graphs
 
     }
 }

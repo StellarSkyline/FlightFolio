@@ -8,5 +8,6 @@ import dagger.hilt.components.SingletonComponent
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
+    //TODO: Update App Module when Network/Room DB implemented
 
 }

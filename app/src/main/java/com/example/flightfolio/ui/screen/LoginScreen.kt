@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -19,17 +18,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.flightfolio.R
 import com.example.flightfolio.ui.components.InputText
+import com.example.flightfolio.ui.components.LabelText
+import com.example.flightfolio.ui.components.PasswordInputText
 import com.example.flightfolio.ui.components.PrimaryButton
+import com.example.flightfolio.ui.components.TitleText
+import com.example.flightfolio.ui.navigation.Screen
 import com.example.flightfolio.ui.theme.FFColorList
-import com.example.flightfolio.viewmodel.LoginViewModel
+import com.example.flightfolio.viewmodel.LoginRegisterViewModel
 
 
 @Composable
-fun LoginScreen(vm: LoginViewModel,onNavigate: (String) -> Any) {
+fun LoginScreen(vm: LoginRegisterViewModel, onNavigate: (String) -> Any) {
 
     val userName by vm.userName.collectAsStateWithLifecycle()
     val password by vm.password.collectAsStateWithLifecycle()
@@ -44,11 +46,7 @@ fun LoginScreen(vm: LoginViewModel,onNavigate: (String) -> Any) {
 
         Spacer(modifier = Modifier.height(30.dp))
 
-        Text(
-            text = "FlightFolio",
-            fontSize = 48.sp,
-            color = FFColorList.txt_primary
-        )
+        TitleText(text = "FlightFolio")
 
         Spacer(modifier = Modifier.height(70.dp))
 
@@ -71,11 +69,7 @@ fun LoginScreen(vm: LoginViewModel,onNavigate: (String) -> Any) {
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.Start
         ) {
-            Text(
-                text = "User Name:",
-                color = FFColorList.txt_primary,
-                fontSize = 16.sp
-            )
+            LabelText(text = "User Name:")
 
             InputText(
                 modifier = Modifier,
@@ -86,13 +80,9 @@ fun LoginScreen(vm: LoginViewModel,onNavigate: (String) -> Any) {
 
             Spacer(modifier = Modifier.height(15.dp))
 
-            Text(
-                text = "Password:",
-                color = FFColorList.txt_primary,
-                fontSize = 16.sp
-            )
+            LabelText(text = "Password:")
 
-            InputText(
+            PasswordInputText(
                 modifier = Modifier,
                 text = password
             ) {
@@ -112,7 +102,7 @@ fun LoginScreen(vm: LoginViewModel,onNavigate: (String) -> Any) {
             PrimaryButton(
                 title = "Register"
             ) {
-                //TODO: Handle Logic
+                onNavigate(Screen.RegisterScreen.route)
             }
         }
     }
