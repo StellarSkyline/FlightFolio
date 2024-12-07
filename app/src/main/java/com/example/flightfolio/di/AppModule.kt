@@ -5,6 +5,7 @@ import com.example.flightfolio.data.interfaces.UserPreferences
 import com.example.flightfolio.data.repo.UserPreferencesImpl
 import com.example.flightfolio.data.repo.LoginRegisterRepoImpl
 import com.example.flightfolio.data.interfaces.LoginRegisterRepo
+
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -23,4 +24,3 @@ object AppModule {
     @Provides
     @Singleton
     fun providesLoginRegisterRepo(dataStore: UserPreferences): LoginRegisterRepo = LoginRegisterRepoImpl(dataStore)
-}

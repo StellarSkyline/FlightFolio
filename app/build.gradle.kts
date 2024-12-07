@@ -51,6 +51,7 @@ dependencies {
     implementation(libs.androidx.navigation.common.ktx)
     implementation(libs.androidx.navigation.runtime.ktx)
     implementation(libs.firebase.auth)
+    implementation(libs.play.services.auth)
     kapt("com.google.dagger:hilt-android-compiler:2.48")
     //HiltViewModel
     kapt("androidx.hilt:hilt-compiler:1.0.0-alpha03")
