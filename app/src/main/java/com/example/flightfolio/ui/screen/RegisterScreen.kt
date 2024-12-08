@@ -1,21 +1,20 @@
 package com.example.flightfolio.ui.screen
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.flightfolio.domain.AuthState
+import com.example.flightfolio.ui.components.IncludeSpinner
 import com.example.flightfolio.ui.components.InputText
 import com.example.flightfolio.ui.components.LabelText
 import com.example.flightfolio.ui.components.PasswordInputText
@@ -29,11 +28,17 @@ import com.example.flightfolio.viewmodel.LoginRegisterViewModel
 fun RegisterScreen(vm: LoginRegisterViewModel, onNavigate: (String) -> Any) {
 
     //States
-    val userName by vm.userName.collectAsStateWithLifecycle()
-    val password by vm.password.collectAsStateWithLifecycle()
-    val repeatPassword by vm.repeatPassword.collectAsStateWithLifecycle()
-    val fullName by vm.fullName.collectAsStateWithLifecycle()
-    val quickPin by vm.quickLoginPin.collectAsStateWithLifecycle()
+    val email by vm.emailState.collectAsStateWithLifecycle()
+    val password by vm.passwordState.collectAsStateWithLifecycle()
+    val authState by vm.authState.collectAsStateWithLifecycle()
+
+    //TODO: Handle data validation
+
+    //Handle Logic
+    when (authState) {
+        AuthState.Authenticated -> onNavigate(Screen.LoginScreen.route)
+        AuthState.Loading -> IncludeSpinner()
+    }
 
     Column(
         modifier = Modifier
@@ -58,21 +63,9 @@ fun RegisterScreen(vm: LoginRegisterViewModel, onNavigate: (String) -> Any) {
 
             InputText(
                 modifier = Modifier,
-                text = userName
+                text = email
             ) {
-                vm.changeState(userName = it)
-
-            }
-
-            Spacer(modifier = Modifier.height(15.dp))
-
-            LabelText(text = "Enter Full Name:")
-
-            InputText(
-                modifier = Modifier,
-                text = fullName
-            ) {
-                vm.changeState(fullName = it)
+                vm.changeEmailState(email = it)
             }
 
             Spacer(modifier = Modifier.height(15.dp))
@@ -83,39 +76,18 @@ fun RegisterScreen(vm: LoginRegisterViewModel, onNavigate: (String) -> Any) {
                 modifier = Modifier,
                 text = password
             ) {
-                vm.changeState(password = it)
+                vm.changePasswordState(password = it)
             }
 
-            Spacer(modifier = Modifier.height(15.dp))
+            Spacer(modifier = Modifier.height(30.dp))
 
-            LabelText(text = "Retype Password:")
-
-            PasswordInputText(
-                modifier = Modifier,
-                text = repeatPassword
+            PrimaryButton(
+                modifier = Modifier.width(300.dp),
+                title = "Register"
             ) {
-                vm.changeState(repeatPassword = it)
+                vm.signUp()
             }
 
-            Spacer(modifier = Modifier.height(15.dp))
-
-            LabelText(text = "Enter Quick Login PIN:")
-
-            InputText(
-                modifier = Modifier,
-                text = quickPin
-            ) {
-                vm.changeState(quickLoginPin = it)
-            }
         }
-
-        Spacer(modifier = Modifier.height(30.dp))
-
-        PrimaryButton(
-            modifier = Modifier.width(300.dp),
-            title = "Register") {
-            //TODO: Handle Logic
-        }
-
     }
 }

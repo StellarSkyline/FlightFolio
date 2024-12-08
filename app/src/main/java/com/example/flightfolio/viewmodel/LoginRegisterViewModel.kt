@@ -1,10 +1,16 @@
 package com.example.flightfolio.viewmodel
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.flightfolio.data.interfaces.LoginRegisterRepo
+import com.example.flightfolio.domain.AuthState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -13,23 +19,45 @@ class LoginRegisterViewModel @Inject constructor(
     val repo: LoginRegisterRepo,
     private val savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
-    val userName = savedStateHandle.getStateFlow(key = "userName", initialValue = "")
-    val password = savedStateHandle.getStateFlow(key = "password", initialValue = "")
-    val repeatPassword = savedStateHandle.getStateFlow(key = "repeatPassword", initialValue = "")
-    val fullName = savedStateHandle.getStateFlow(key = "fullName", initialValue = "")
-    val quickLoginPin = savedStateHandle.getStateFlow(key = "quickLoginPin", initialValue = "")
+    //Flows
+    val emailState = savedStateHandle.getStateFlow(key = "email", initialValue = "")
+    val passwordState = savedStateHandle.getStateFlow(key = "password", initialValue = "")
+    val authState = savedStateHandle.getStateFlow("authState", "")
 
-    fun changeState(
-        userName: String = "",
-        password: String = "",
-        repeatPassword: String = "",
-        fullName: String = "",
-        quickLoginPin: String = "",
-    ) {
-        savedStateHandle["userName"] = userName
-        savedStateHandle["password"] = password
-        savedStateHandle["repeatPassword"] = repeatPassword
-        savedStateHandle["fullName"] = fullName
-        savedStateHandle["quickLoginPin"] = quickLoginPin
+    //init check Auth Status
+//    init {
+//        viewModelScope.launch(Dispatchers.IO) {
+//            savedStateHandle["authState"] = repo.getAuthState()
+//        }
+//    }
+
+
+    //State Change fun
+    fun changeEmailState(email: String = "", ) { savedStateHandle["email"] = email }
+    fun changePasswordState(password: String = "") { savedStateHandle["password"] = password }
+
+    fun login(email: String, password: String) {
+        savedStateHandle["authState"] = AuthState.Loading
+        viewModelScope.launch(Dispatchers.IO) {
+            delay(2000)
+            savedStateHandle["authState"] = repo.loginUser(email, password)
+        }
     }
+
+    fun signUp() {
+
+        savedStateHandle["authState"] = AuthState.Loading
+        viewModelScope.launch(Dispatchers.IO) {
+            delay(2000)
+            savedStateHandle["authState"] = repo.signUp(emailState.value, passwordState.value)
+        }
+    }
+
+    fun signOut() {
+        viewModelScope.launch(Dispatchers.IO) {
+            savedStateHandle["authState"] = repo.signOut()
+        }
+    }
+
+
 }

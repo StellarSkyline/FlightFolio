@@ -31,10 +31,14 @@ import com.example.flightfolio.viewmodel.LoginRegisterViewModel
 
 
 @Composable
-fun LoginScreen(vm: LoginRegisterViewModel, onNavigate: (String) -> Any) {
+fun LoginScreen(
+    vm: LoginRegisterViewModel,
+    onNavigate: (String) -> Any
+) {
 
-    val userName by vm.userName.collectAsStateWithLifecycle()
-    val password by vm.password.collectAsStateWithLifecycle()
+    val email by vm.emailState.collectAsStateWithLifecycle()
+    val password by vm.passwordState.collectAsStateWithLifecycle()
+    val authState by vm.authState.collectAsStateWithLifecycle()
 
     Column(
         modifier = Modifier
@@ -73,9 +77,9 @@ fun LoginScreen(vm: LoginRegisterViewModel, onNavigate: (String) -> Any) {
 
             InputText(
                 modifier = Modifier,
-                text = userName
+                text = email
             ) {
-                vm.changeState(userName = it)
+                vm.changeEmailState(email = it)
             }
 
             Spacer(modifier = Modifier.height(15.dp))
@@ -86,7 +90,7 @@ fun LoginScreen(vm: LoginRegisterViewModel, onNavigate: (String) -> Any) {
                 modifier = Modifier,
                 text = password
             ) {
-                vm.changeState(password = it)
+                vm.changePasswordState(password = it)
             }
 
             Spacer(modifier = Modifier.height(15.dp))

@@ -23,7 +23,7 @@ fun AppNavigation(paddingValues: PaddingValues) {
         ) {
             composable(route = Screen.LoginScreen.route) { entry ->
                 val viewModel = entry.sharedViewModel<LoginRegisterViewModel>(navController)
-                LoginScreen(vm = viewModel){
+                LoginScreen(vm = viewModel) {
                     navController.navigate(it)
                 }
             }
@@ -31,7 +31,7 @@ fun AppNavigation(paddingValues: PaddingValues) {
             composable(route = Screen.RegisterScreen.route) { entry ->
                 val viewModel = entry.sharedViewModel<LoginRegisterViewModel>(navController)
                 RegisterScreen(viewModel) {
-                    //TODO: Handle Navigation Logic
+                    navController.popBackStack(it, false)
                 }
             }
         }
