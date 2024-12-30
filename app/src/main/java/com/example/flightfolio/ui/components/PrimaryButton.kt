@@ -20,7 +20,7 @@ fun PrimaryButton(
     onClick: () -> Unit
 ) {
     Button(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .height(40.dp),
         colors = ButtonDefaults.buttonColors(containerColor = FFColorList.btn_secondary),
