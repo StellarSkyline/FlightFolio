@@ -7,6 +7,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import com.example.flightfolio.extension.sharedViewModel
+import com.example.flightfolio.ui.screen.HomeScreen
 import com.example.flightfolio.ui.screen.LoginScreen
 import com.example.flightfolio.ui.screen.RegisterScreen
 import com.example.flightfolio.viewmodel.LoginRegisterViewModel
@@ -36,7 +37,19 @@ fun AppNavigation(paddingValues: PaddingValues) {
             }
         }
 
-        //Other Graphs
+        //Main Graph
+        navigation(
+            startDestination = Screen.HomeScreen.route,
+            route = Screen.MainGraph.route
+        ) {
+            composable(route = Screen.HomeScreen.route) { entry ->
+                HomeScreen{
+                    //TODO: Handle Navigation Logic
+                }
+            }
+        }
+
+
 
     }
 }
